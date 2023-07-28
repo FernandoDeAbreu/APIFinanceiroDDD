@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Interfaces.ISistemaFinanceiro
+namespace Domain.Interfaces.Services
 {
-    public class InterfaceSistemaFinanceiro
+    public interface IUsuarioSistemaFinanceiroServices
     {
     }
 }

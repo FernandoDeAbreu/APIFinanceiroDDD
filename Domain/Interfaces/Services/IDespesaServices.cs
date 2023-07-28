@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Interfaces.IDespesa
+namespace Domain.Interfaces.Services
 {
-    public interface InterfaceDespesa
+    public interface IDespesaServices
     {
     }
 }

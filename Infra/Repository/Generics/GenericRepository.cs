@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 
 namespace Infra.Repositorio.Generics
 {
-    public class RepositoryGeneric<T> : InterfaceGeneric<T>, IDisposable where T : class
+    public class GenericRepository<T> : IGeneric<T>, IDisposable where T : class
     {
         private readonly DbContextOptions<ContextBase> _OptionsBuilder;
 
-        public RepositoryGeneric()
+        public GenericRepository()
         {
             _OptionsBuilder = new DbContextOptions<ContextBase>();
         }
