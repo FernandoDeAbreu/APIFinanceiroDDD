@@ -9,7 +9,7 @@ namespace Entities.Entidades
         public int Ano { get; set; }
         public int DiaFechamento { get; set; }
         public bool GerarCopiaDespesa { get; set; }
-        public bool MesCopia { get; set; }
-        public bool AnoCopia { get; set; }
+        public int MesCopia { get; set; }
+        public int AnoCopia { get; set; }
     }
 }
