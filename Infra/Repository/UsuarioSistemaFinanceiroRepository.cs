@@ -1,26 +1,45 @@
 ﻿using Domain.Interfaces.IUsuarioSistemaFinanceiro;
 using Entities.Entidades;
+using Infra.Configuracao;
 using Infra.Repositorio.Generics;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infra.Repository
 {
     public class UsuarioSistemaFinanceiroRepository : GenericRepository<UsuarioSistemaFinanceiro>, IUsuarioSistemaFinanceiro
     {
-        public Task<IList<UsuarioSistemaFinanceiro>> ListarUsuariosSistema(int IdSistema)
+        private readonly DbContextOptions _OptionsBuilder;
+
+        public UsuarioSistemaFinanceiroRepository()
         {
-            throw new System.NotImplementedException();
+            _OptionsBuilder = new DbContextOptions<ContextBase>();
         }
 
-        public Task<UsuarioSistemaFinanceiro> ObterUsuarioPorEmail(string emailUsuario)
+        public async Task<IList<UsuarioSistemaFinanceiro>> ListarUsuariosSistema(int IdSistema)
         {
-            throw new System.NotImplementedException();
+            using (var banco = new ContextBase(_OptionsBuilder))
+            {
+                return await banco.UsuarioSistemaFinanceiros
+                    .Where(s => s.IdSistema == IdSistema).AsNoTracking().ToListAsync();
+            }
         }
 
-        public Task RemoveUsuarios(List<UsuarioSistemaFinanceiro> usuarios)
+        public async Task<UsuarioSistemaFinanceiro> ObterUsuarioPorEmail(string emailUsuario)
         {
-            throw new System.NotImplementedException();
+            using (var banco = new ContextBase(_OptionsBuilder))
+            {
+                return await banco.UsuarioSistemaFinanceiros.AsNoTracking().FirstOrDefaultAsync(x => x.EmailUsuario.Equals(emailUsuario));
+            }
+        }
+
+        public async Task RemoveUsuarios(List<UsuarioSistemaFinanceiro> usuarios)
+        {
+            using (var banco = new ContextBase(_OptionsBuilder))
+            {
+                banco.UsuarioSistemaFinanceiros.RemoveRange(usuarios);
+                await banco.SaveChangesAsync();
+            }
+
         }
     }
 }
