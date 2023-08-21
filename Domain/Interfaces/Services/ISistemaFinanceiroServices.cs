@@ -6,6 +6,6 @@ namespace Domain.Interfaces.Services
     {
         Task AdicionarSistemaFinanceiro(SistemaFinanceiro sistemaFinanceiro);
 
-        Task AtulizarSistemaFinanceiro(SistemaFinanceiro sistemaFinanceiro);
+        Task AtualizarSistemaFinanceiro(SistemaFinanceiro sistemaFinanceiro);
     }
 }

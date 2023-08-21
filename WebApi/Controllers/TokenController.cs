@@ -23,23 +23,24 @@ namespace WebApi.Controllers
         [AllowAnonymous]
         [Produces("application/json")]
         [HttpPost("/api/CreateToken")]
-        public async Task<IActionResult> CreateToken([FromBody] InputModel input)
+        public async Task<IActionResult> CreateToken([FromBody] InputModel Input)
         {
-            if(string.IsNullOrWhiteSpace(input.Email) || string.IsNullOrWhiteSpace(input.Password))
+            if (string.IsNullOrWhiteSpace(Input.Email) || string.IsNullOrWhiteSpace(Input.Password))
+            {
                 return Unauthorized();
+            }
 
-
-            var result = await _signInManager.PasswordSignInAsync(input.Password, input.Email, false, lockoutOnFailure: false);
+            var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, false, lockoutOnFailure: false);
             if (result.Succeeded)
             {
                 var token = new TokenJWTBuilder()
-                   .AddSecurityKey(JwtSecurityKey.Create("Secret_Key-12345678"))
-                .AddSubject("Fernando Abreu")
-                .AddIssuer("Teste.Securiry.Bearer")
-                .AddAudience("Teste.Securiry.Bearer")
-                .AddClaim("UsuarioAPINumero", "1")
-                .AddExpiry(5)
-                .Builder();
+                    .AddSecurityKey(JwtSecurityKey.Create("Secret_Key-12345678"))
+                 .AddSubject("Canal Dev Net Core")
+                 .AddIssuer("Teste.Securiry.Bearer")
+                 .AddAudience("Teste.Securiry.Bearer")
+                 .AddClaim("UsuarioAPINumero", "1")
+                 .AddExpiry(5)
+                 .Builder();
 
                 return Ok(token.value);
 

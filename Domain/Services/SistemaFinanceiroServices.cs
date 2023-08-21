@@ -30,7 +30,7 @@ namespace Domain.Services
             }
         }
 
-        public async Task AtulizarSistemaFinanceiro(SistemaFinanceiro sistemaFinanceiro)
+        public async Task AtualizarSistemaFinanceiro(SistemaFinanceiro sistemaFinanceiro)
         {
             var valido = sistemaFinanceiro.ValidarPropriedadeString(sistemaFinanceiro.Nome, "Nome");
 
